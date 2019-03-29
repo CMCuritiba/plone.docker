@@ -9,7 +9,7 @@ ENV PLONE_MAJOR=4.3
 ENV PLONE_VERSION=4.3.6
 ENV PLONE_MD5=52b010e7d3dda08a2fb6a5d20316c77c
 
-RUN buildDeps="curl sudo python-setuptools python-dev build-essential libssl-dev libxml2-dev libxslt1-dev libbz2-dev libjpeg62-turbo-dev" \
+RUN buildDeps="curl sudo python-setuptools python-dev build-essential libssl-dev libxml2-dev libxslt1-dev libbz2-dev libjpeg62-turbo-dev zlib1g-dev" \
  && runDeps="libxml2 libxslt1.1 libjpeg62 rsync" \
  && apt-get update \
  && apt-get install -y --no-install-recommends $buildDeps \
