@@ -92,6 +92,19 @@ class Environment(object):
             with open(self.zeoserver_conf, 'w') as cfile:
                 cfile.write(text)
 
+
+    def zodbcache(self):
+        """ ZODB Cache size
+        """
+        cache_size = self.env.get("ZODB_CACHE_SIZE",'')
+        if not cache_size:
+            return
+        with open(self.zope_conf, 'r') as cfile:
+            text = cfile.read()
+            text = text.replace('cache-size 30000', 'cache-size %s' % cache_size)
+        with open(self.zope_conf, 'w') as cfile:
+            cfile.write(text)
+
     def buildout(self):
         """ Buildout from environment variables
         """
@@ -140,6 +153,7 @@ class Environment(object):
 
     def setup(self, **kwargs):
         self.buildout()
+        self.zodbcache()
         self.zeoclient()
         self.zeopack()
         self.zeoserver()
